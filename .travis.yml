@@ -5,7 +5,6 @@ addons:
   apt:
     sources: 
       - sourceline: 'ppa:ubuntu-toolchain-r/test'
-#      - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main'
     packages:
 #      - g++-5 # test fails, even if according to https://en.cppreference.com/w/cpp/compiler_support, gcc5 should have complete support
       - g++-6
@@ -17,10 +16,10 @@ addons:
       - clang-8
 
 before_install:
-  - sudo apt-get update; sudo apt-get install apt-transport-https ca-certificates gnupg software-properties-common wget;
+  - sudo apt-get update; sudo apt-get install --no-install-recommends apt-transport-https ca-certificates gnupg software-properties-common wget;
   - wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
   - sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'; sudo apt-get update;
-  - sudo apt-get install cmake;
+  - sudo apt-get install --no-install-recommends cmake;
 
 matrix:
   include:
