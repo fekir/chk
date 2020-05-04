@@ -24,7 +24,7 @@ Notice that in the given example it is not possible to use `assert` or `static_a
 
 `chk::cassert` work like a `constexpr` function and can take an optional string in two forms:
 
- * takes a string-like (`\0`-terminated `const char*`, `std::string`) object as optional parameter: `chk::cassert(i > 2, "fail");`
+ * takes a string-like (`\0` terminated `const char*`, `std::string`) object as optional parameter: `chk::cassert(i > 2, "fail");`
  * the string can be computed lazily only in case of failure: `chk::cassert(i > 2, [](){/* compute string at runtime*/});`
  
 The second form is useful in order not to waste time creating an error message if the test does not fail.
