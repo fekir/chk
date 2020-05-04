@@ -8,7 +8,15 @@ namespace detail {
 // __builtin() is a gcc extension (provided by clang 9 too), msvc does not have anythign similar
 // look at https://en.cppreference.com/w/cpp/experimental/source_location
 
-#if defined(_MSC_VER) || (defined(__clang_major__) && __clang_major__ < 9) || (defined(__GNUC__) && __GNUC__ < 7)
+#if defined(_MSC_VER)
+#	define MISSING_CONSTEXPR_BUILTIN_LOCATION
+#elif defined(__clang_major__)
+    #if  __clang_major__ < 9
+    #	define MISSING_CONSTEXPR_BUILTIN_LOCATION
+    #else
+    // notice that clang9 defines __GNUC__ < 7
+    #endif
+#elif (defined(__GNUC__) && __GNUC__ < 7)
 #	define MISSING_CONSTEXPR_BUILTIN_LOCATION
 #else
 // FIXME: gcc <=6, it's not constexpr!

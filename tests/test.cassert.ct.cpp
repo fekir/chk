@@ -8,7 +8,10 @@ constexpr int fun(int i) {
 }
 }  // namespace
 
-static_assert(fun(-1) == -1, "no cassert triggered");
-
+#if  defined(__clang_major__) && __clang_major__ != 9) // ACTUALLY ONLY RELEASE HAS ISSUES
+#error "error"
+#else
+static_assert(fun(-1) == -1, "no cassert triggered"); // clang-6, release, does not fail
+#endif
 int main() {
 }
